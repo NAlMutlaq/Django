@@ -1,10 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from .models import Listing
 
-from django.http import HttpResponse
 
 def home(request):
     return render(request, 'home.html')
 
-
 def index(request):
-    return render(request, 'listings.html')
+    listings = Listing.objects.all()
+    context = {'listings': listings}
+    return render(request, 'listings.html', context)
+
